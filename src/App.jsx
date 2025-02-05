@@ -23,9 +23,10 @@ const App = () => {
       >
         <Box
           sx={{
-            border: `1px solid ${theme.palette.primary.light}`,
+            border: `1px solid ${theme.palette.secondary.dark}`,
             width: "25%",
             height: "100%",
+            overflow: "auto",
           }}
         >
           <Parts />
@@ -35,7 +36,7 @@ const App = () => {
         </Box>
         <Box
           sx={{
-            border: `1px solid ${theme.palette.primary.light}`,
+            border: `1px solid ${theme.palette.secondary.dark}`,
             width: "25%",
             height: "100%",
           }}

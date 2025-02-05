@@ -4,12 +4,14 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#1976d2",
-      light: "#b5b2b2",
-      dark: "#1565c0",
+      light: "#007aff",
+      dark: "#0B6BB6",
       contrastText: "#fff",
     },
     secondary: {
       main: "#dc004e",
+      light: "#EAEAEA",
+      dark: "#b5b2b2",
     },
     background: {
       default: "#fff",
@@ -23,7 +25,8 @@ const theme = createTheme({
       fontSize: 35,
     },
     h2: {
-      fontSize: 24,
+      fontSize: 20,
+      fontWeight: "600",
     },
     h3: {
       fontSize: 20,
