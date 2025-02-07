@@ -1,22 +1,5 @@
-/* styles.css */
-
-.scrollable {
-    height: 300px;
-    /* Высота контейнера */
-    overflow-y: auto;
-    /* Вертикальная прокрутка */
-    border: 1px solid #ccc;
-    /* Граница */
-    border-radius: 8px;
-    /* Закругленные углы */
-    padding: 16px;
-    /* Внутренние отступы */
-}
-
-/* Стили для скроллбара */
 ::-webkit-scrollbar {
     width: 5px;
-    /* Ширина скроллбара */
 }
 
 ::-webkit-scrollbar-track {

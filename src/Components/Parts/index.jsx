@@ -1,17 +1,20 @@
+import data from "../../parts.json"
 import { Stack, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { GiProcessor } from "react-icons/gi"
-import data from "../../parts.json"
+import { useDispatch } from "react-redux"
+import { setPart } from "../../redux/slices/filtersStateSlice"
 
 const Parts = () => {
   const [parts, setParts] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setParts(data.parts)
   }, [])
 
   const selectedPart = (idnt) => {
-    console.log(idnt)
+    dispatch(setPart(idnt))
   }
 
   return (
@@ -28,7 +31,8 @@ const Parts = () => {
             cursor: "pointer",
             transition: "background-color 0.1s ease",
             "&:hover": {
-              backgroundColor: "secondary.light",
+              backgroundColor: "secondary.dark",
+              color: "primary.contrastText",
             },
           }}
           onClick={() => selectedPart(part.idnt)}

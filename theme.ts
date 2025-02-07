@@ -9,7 +9,7 @@ const theme = createTheme({
       contrastText: "#fff",
     },
     secondary: {
-      main: "#dc004e",
+      main: "#000",
       light: "#EAEAEA",
       dark: "#b5b2b2",
     },
@@ -29,7 +29,7 @@ const theme = createTheme({
       fontWeight: "600",
     },
     h3: {
-      fontSize: 20,
+      fontSize: ".975rem",
     },
     body1: {
       fontWeight: "500",
