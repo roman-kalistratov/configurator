@@ -9,9 +9,9 @@ const theme = createTheme({
       contrastText: "#fff",
     },
     secondary: {
-      main: "#000",
+      main: "#FDC70F",
       light: "#EAEAEA",
-      dark: "#b5b2b2",
+      dark: "#d7d7d8",
     },
     background: {
       default: "#fff",
@@ -20,19 +20,18 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Assistant, sans-serif",
-
-    h1: {
-      fontSize: 35,
-    },
     h2: {
-      fontSize: 20,
-      fontWeight: "600",
+      fontSize: "20px",
+      fontWeight: "500",
     },
     h3: {
       fontSize: ".975rem",
     },
     body1: {
       fontWeight: "500",
+    },
+    body2: {
+      fontWeight: "300",
     },
   },
   components: {

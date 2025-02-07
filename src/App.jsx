@@ -1,48 +1,43 @@
-import { Box, Container, Paper, Stack } from "@mui/material"
+import { Box, Container, Stack, useTheme } from "@mui/material"
 import Parts from "./Components/Parts"
 import RightSide from "./Components/RightSide"
 import Updates from "./Components/Updates"
 
 const App = () => {
+  const theme = useTheme()
   return (
-    <Container
-      maxWidth="lg"
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
+    <Container sx={{ p: 2 }}>
       <Stack
         direction="row"
-        spacing={1}
-        sx={{ width: "100%", height: "800px" }}
-        alignItems="center"
-        justifyContent="center"
+        spacing={3}
+        sx={{ width: "100%", position: "relative" }}
+        alignItems="flex-start"
       >
-        <Paper
-          elevation={4}
+        <Box sx={{ flexGrow: 1 }}>
+          <Parts />
+        </Box>
+
+        {/* <Box
           sx={{
-            width: "20%",
+            width: "calc(100% - 40% - 16px)",
             height: "100%",
             overflow: "auto",
           }}
         >
-          <Parts />
-        </Paper>
-        <Box sx={{ width: "calc(100% - 40% - 16px)", height: "100%" }}>
           <Updates />
-        </Box>
-        <Paper
-          elevation={4}
+        </Box> */}
+
+        <Box
           sx={{
-            width: "20%",
-            height: "100%",
+            width: "33.3333%",
+            border: `1px solid ${theme.palette.secondary.dark}`,
+            p: "2rem",
+            position: "sticky",
+            top: 0,
           }}
         >
           <RightSide />
-        </Paper>
+        </Box>
       </Stack>
     </Container>
   )

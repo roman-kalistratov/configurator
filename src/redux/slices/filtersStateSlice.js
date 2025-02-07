@@ -5,43 +5,67 @@ export const filtersSlice = createSlice({
   name: "filters",
   initialState: {
     part: null, // данные из ключевой колонки, которые относятся к idnt
+    selectedFilters: [], // массив выбранных фильтров
     filters: {}, // данные при выборе part, по которой фильтруются товары
+    partItems: {}, // все доступные товары
+    compat: {}, // зависимости
   },
   reducers: {
     setPart: (state, action) => {
       state.part = action.payload
-      state.filters = getTagsByPart(action.payload) // обновляем теги при изменении part
+      const { filters, partItems, compat } = getDataByPart(action.payload)
+      state.filters = filters
+      state.partItems = partItems
+      state.compat = compat
+    },
+    setFilter: (state, action) => {
+      const filter = action.payload // Объект фильтра с полями name, tag, cl
+      const filterTag = filter.tag // Извлекаем только tag
+
+      if (state.selectedFilters.includes(filterTag)) {
+        // Убираем фильтр, если он уже выбран
+        state.selectedFilters = state.selectedFilters.filter(
+          (f) => f !== filterTag
+        )
+      } else {
+        // Добавляем новый фильтр
+        state.selectedFilters.push(filterTag)
+      }
     },
   },
 })
 
-// Функция для получения тегов по части
-const getTagsByPart = (idnt) => {
+// Функция для получения тегов и товаров по части
+const getDataByPart = (idnt) => {
   if (idnt === null || idnt === undefined) {
     console.warn("IDNT is null or undefined")
-    return {} // Возвращаем пустой объект, если idnt не определен
+    return { filters: {}, partItems: {} }
   }
 
   if (!data.upgrade[idnt]) {
     console.error(`No data found for idnt: ${idnt}`)
-    return {}
+    return { filters: {}, partItems: {} }
   }
 
-  if (!data.upgrade[idnt].filter) {
-    console.warn(`No filters available for idnt: ${idnt}`)
-    return {}
-  }
+  const upgradeData = data.upgrade[idnt]
 
-  return Object.entries(data.upgrade[idnt].filter).reduce(
-    (acc, [categoryKey, categoryValue]) => {
-      acc[categoryKey] = {
-        title: categoryValue.title || "",
-        tags: Object.values(categoryValue).filter((tag) => tag.name),
-      }
-      return acc
-    },
-    {}
-  )
+  const filters = upgradeData.filter
+    ? Object.entries(upgradeData.filter).reduce(
+        (acc, [categoryKey, categoryValue]) => {
+          acc[categoryKey] = {
+            title: categoryValue.title || "",
+            filters: Object.values(categoryValue).filter((tag) => tag.name),
+          }
+          return acc
+        },
+        {}
+      )
+    : {}
+
+  const partItems = upgradeData.items || {}
+  const compat = upgradeData.compat || {}
+
+  return { filters, partItems, compat }
 }
 
 export const { setPart, setFilter } = filtersSlice.actions

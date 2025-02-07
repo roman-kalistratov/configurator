@@ -1,183 +1,199 @@
-import { useEffect, useRef, useState } from "react"
-import { Box, Chip, Paper, Stack } from "@mui/material"
+import React, { useEffect, useState, useMemo, useCallback } from "react"
+import { Box, Chip, Paper, Stack, Typography } from "@mui/material"
 import { useTheme } from "@emotion/react"
 import ViewListIcon from "@mui/icons-material/ViewList"
 import GridViewIcon from "@mui/icons-material/GridView"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { setFilter } from "../../redux/slices/filtersStateSlice"
 
 const Updates = () => {
   const theme = useTheme()
-  const [selectedFilters, setSelectedFilters] = useState({}) // Храним выбранные фильтры для каждой группы
-  const tagsByPart = useSelector((state) => state.filters.filters)
-
-  // Состояние для представлений каждой группы тегов
+  const filtersByPart = useSelector((state) => state.filters.filters)
+  const part = useSelector((state) => state.filters.part)
+  const partItems = useSelector((state) => state.filters.partItems)
+  const selectedFilters = useSelector((state) => state.filters.selectedFilters)
   const [views, setViews] = useState({})
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (tagsByPart) {
-      console.log(tagsByPart)
-      // Инициализируем состояние представления и выбранные фильтры для каждой группы тегов
-      const initialViews = Object.keys(tagsByPart).reduce((acc, key) => {
-        acc[key] = "list" // Устанавливаем начальное представление для каждой группы
+    if (filtersByPart) {
+      const initialViews = Object.keys(filtersByPart).reduce((acc, key) => {
+        acc[key] = "list"
         return acc
       }, {})
       setViews(initialViews)
-      setSelectedFilters({}) // Сбрасываем выбранные фильтры
     }
-  }, [tagsByPart])
+  }, [filtersByPart])
 
-  const handleMouseDown = (e, containerRef) => {
-    containerRef.current.isDragging = true
-    containerRef.current.startX = e.pageX - containerRef.current.offsetLeft
-    containerRef.current.scrollLeft = containerRef.current.scrollLeft
-    e.preventDefault()
+  const filterPartItems = (partItems, selectedFilters) => {
+    if (selectedFilters.length === 0) {
+      return partItems
+    }
+    return Object.fromEntries(
+      Object.entries(partItems).filter(([, item]) => {
+        return selectedFilters.some((filterTag) => {
+          return Object.values(item.tags).some((tagArray) =>
+            tagArray.includes(filterTag)
+          )
+        })
+      })
+    )
   }
 
-  const handleMouseMove = (e, containerRef) => {
-    if (!containerRef.current.isDragging) return
-    const x = e.pageX - containerRef.current.offsetLeft
-    const walk = x - containerRef.current.startX
-    containerRef.current.scrollLeft -= walk
-  }
+  const filteredPartItems = useMemo(() => {
+    return filterPartItems(partItems, selectedFilters)
+  }, [partItems, selectedFilters])
 
-  const handleMouseUp = (containerRef) => {
-    containerRef.current.isDragging = false
-  }
+  const selectFilter = useCallback(
+    (filter) => {
+      dispatch(setFilter(filter))
+    },
+    [dispatch]
+  )
 
-  const handleMouseLeave = (containerRef) => {
-    containerRef.current.isDragging = false
-  }
-
-  const selectTag = (tag, key) => {
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [key]: tag, // Обновляем выбранный фильтр для конкретной группы
-    }))
-  }
-
-  // Функция для изменения представления для конкретной группы
-  const toggleView = (key, newView) => {
+  const toggleView = useCallback((key, newView) => {
     setViews((prevViews) => ({
       ...prevViews,
       [key]: newView,
     }))
-  }
+  }, [])
+
+  const hasFilters = useMemo(
+    () =>
+      part !== null &&
+      part !== undefined &&
+      Object.keys(filtersByPart).length > 0,
+    [part, filtersByPart]
+  )
 
   return (
-    <Paper elevation={1}>
-      {Object.entries(tagsByPart).length === 0 ? (
-        <Chip
-          label="No tags available."
-          sx={{
-            borderRadius: 0,
-            cursor: "pointer",
-            fontSize: "16px",
-            fontWeight: "bold",
-            background: "none",
-            transition: "background-color 0.1s ease",
-            "&:hover": {
-              color: "primary.dark",
-            },
-          }}
-        />
+    <>
+      {!hasFilters ? (
+        <Paper elevation={1}>
+          <Chip
+            label="Select a part to view filters."
+            sx={{
+              borderRadius: 0,
+              cursor: "pointer",
+              fontSize: "16px",
+              fontWeight: "bold",
+              background: "none",
+              transition: "background-color 0.1s ease",
+              "&:hover": {
+                color: "primary.dark",
+              },
+            }}
+          />
+        </Paper>
       ) : (
-        Object.entries(tagsByPart).map(([key, { title, tags }]) => {
-          const containerRef = useRef({
-            isDragging: false,
-            startX: 0,
-            scrollLeft: 0,
-          })
-
-          return (
-            <Stack key={key} direction="row" alignItems="center">
-              <Chip
-                label="ALL"
-                sx={{
-                  borderRadius: 0,
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  background: "none",
-                  transition: "background-color 0.1s ease",
-                  "&:hover": {
-                    color: "primary.dark",
-                  },
-                }}
-              />
-              <Box
-                ref={containerRef}
-                sx={{
-                  display: "flex",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  width: "100%",
-                  position: "relative",
-                  borderRight: `1px solid ${theme.palette.secondary.dark}`,
-                  borderLeft: `1px solid ${theme.palette.secondary.dark}`,
-                }}
-                onMouseDown={(e) => handleMouseDown(e, containerRef)}
-                onMouseUp={() => handleMouseUp(containerRef)}
-                onMouseLeave={() => handleMouseLeave(containerRef)}
-                onMouseMove={(e) => handleMouseMove(e, containerRef)}
-              >
-                {tags.map((tag, index) => (
-                  <Chip
-                    key={index}
-                    label={tag.name}
+        Object.entries(filtersByPart).map(([key, { title, filters }]) => (
+          <React.Fragment key={key}>
+            <Typography variant="h2" sx={{ pX: 2, pb: 1 }}>
+              {title}
+            </Typography>
+            <Paper sx={{ mb: 2 }} elevation={1}>
+              <Stack direction="row" alignItems="center">
+                <Chip
+                  label="ALL"
+                  sx={{
+                    borderRadius: 0,
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    background: "none",
+                    transition: "background-color 0.1s ease",
+                    "&:hover": {
+                      color: "primary.dark",
+                    },
+                  }}
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    width: "100%",
+                  }}
+                >
+                  {filters.map((filter, index) => (
+                    <Chip
+                      key={index}
+                      label={filter.name}
+                      sx={{
+                        height: "auto",
+                        p: 1.4,
+                        borderRadius: 0,
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        transition: "background-color 0.1s ease",
+                        background: selectedFilters.includes(filter.tag)
+                          ? theme.palette.secondary.main
+                          : "inherit",
+                        "&:hover": {
+                          backgroundColor: "secondary.main",
+                        },
+                      }}
+                      onClick={() => selectFilter(filter)}
+                    />
+                  ))}
+                </Box>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  px={1.4}
+                  alignItems="center"
+                  ml="auto"
+                >
+                  <ViewListIcon
                     sx={{
-                      height: "auto",
-                      p: 1.4,
-                      borderRadius: 0,
+                      fontSize: "24px",
                       cursor: "pointer",
-                      fontSize: "16px",
-                      background: "none",
-                      transition: "background-color 0.1s ease",
-                      borderBottom: `1px solid ${
-                        tag === selectedFilters[key]
-                          ? theme.palette.primary.light
-                          : "inherit"
-                      }`,
-                      "&:hover": {
-                        color: "primary.light",
-                      },
+                      color:
+                        views[key] === "list" ? "primary.light" : "inherit",
                     }}
-                    onClick={() => selectTag(tag, key)}
+                    onClick={() => toggleView(key, "list")}
                   />
-                ))}
-              </Box>
-              <Stack
-                direction="row"
-                spacing={1}
-                px={1.4}
-                alignItems="center"
-                ml="auto"
-              >
-                <ViewListIcon
-                  sx={{
-                    fontSize: "24px",
-                    cursor: "pointer",
-                    color: `${
-                      views[key] === "list" ? "primary.light" : "secondary.main"
-                    }`,
-                  }}
-                  onClick={() => toggleView(key, "list")}
-                />
-                <GridViewIcon
-                  sx={{
-                    fontSize: "24px",
-                    cursor: "pointer",
-                    color: `${
-                      views[key] === "grid" ? "primary.light" : "secondary.main"
-                    }`,
-                  }}
-                  onClick={() => toggleView(key, "grid")}
-                />
+                  <GridViewIcon
+                    sx={{
+                      fontSize: "24px",
+                      cursor: "pointer",
+                      color:
+                        views[key] === "grid" ? "primary.light" : "inherit",
+                    }}
+                    onClick={() => toggleView(key, "grid")}
+                  />
+                </Stack>
               </Stack>
-            </Stack>
-          )
-        })
+            </Paper>
+          </React.Fragment>
+        ))
       )}
-    </Paper>
+      <Box>
+        {Object.entries(filteredPartItems).map(([itemKey, item]) => (
+          <Stack
+            direction="row"
+            key={itemKey}
+            spacing={2}
+            alignItems="center"
+            justifyContent="space-between"
+            py={2}
+            sx={{ borderBottom: `1px solid ${theme.palette.secondary.dark}` }}
+          >
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <img
+                src="https://ksp.co.il/shop/items/128/337558.jpg"
+                alt="item_img"
+                width={70}
+              />
+              <Typography variant="body1">{item.name}</Typography>
+            </Stack>
+            <Typography variant="h2" sx={{ whiteSpace: "nowrap" }}>
+              {item.price}₪
+            </Typography>
+          </Stack>
+        ))}
+      </Box>
+    </>
   )
 }
 
