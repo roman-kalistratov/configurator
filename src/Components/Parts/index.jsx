@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setPart } from "../../redux/slices/filtersStateSlice"
 import { IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
+import { openModal } from "../../redux/slices/modalStateSlice"
 
 const Parts = () => {
   const [parts, setParts] = useState([])
@@ -16,8 +17,9 @@ const Parts = () => {
     setParts(data.parts)
   }, [])
 
-  const selectedPart = (idnt) => {
-    dispatch(setPart(idnt))
+  const selectedPart = (part) => {
+    dispatch(setPart(part))
+    dispatch(openModal())
   }
 
   return (
@@ -44,7 +46,7 @@ const Parts = () => {
               mb: 2,
             },
           }}
-          onClick={() => selectedPart(item.idnt)}
+          onClick={() => selectedPart(item)}
         >
           <Stack direction="row" alignItems="center">
             <Typography

@@ -20,6 +20,10 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Assistant, sans-serif",
+    h1: {
+      fontSize: "26px",
+      fontWeight: "700",
+    },
     h2: {
       fontSize: "20px",
       fontWeight: "500",
@@ -31,7 +35,8 @@ const theme = createTheme({
       fontWeight: "500",
     },
     body2: {
-      fontWeight: "300",
+      fontWeight: "600",
+      opacity: 0.5,
     },
   },
   components: {

@@ -4,7 +4,7 @@ import data from "../../upgrades.json"
 export const filtersSlice = createSlice({
   name: "filters",
   initialState: {
-    part: null, // данные из ключевой колонки, которые относятся к idnt
+    part: {}, // данные из ключевой колонки, которые относятся к idnt
     selectedFilters: [], // массив выбранных фильтров
     filters: {}, // данные при выборе part, по которой фильтруются товары
     partItems: {}, // все доступные товары
@@ -13,23 +13,24 @@ export const filtersSlice = createSlice({
   reducers: {
     setPart: (state, action) => {
       state.part = action.payload
-      const { filters, partItems, compat } = getDataByPart(action.payload)
+      const { filters, partItems, compat } = getDataByPart(action.payload.idnt)
       state.filters = filters
       state.partItems = partItems
       state.compat = compat
     },
     setFilter: (state, action) => {
       const filter = action.payload // Объект фильтра с полями name, tag, cl
-      const filterTag = filter.tag // Извлекаем только tag
 
-      if (state.selectedFilters.includes(filterTag)) {
+      const existingFilterIndex = state.selectedFilters.findIndex(
+        (f) => f.tag === filter.tag // Проверяем, есть ли уже фильтр по tag
+      )
+
+      if (existingFilterIndex !== -1) {
         // Убираем фильтр, если он уже выбран
-        state.selectedFilters = state.selectedFilters.filter(
-          (f) => f !== filterTag
-        )
+        state.selectedFilters.splice(existingFilterIndex, 1)
       } else {
         // Добавляем новый фильтр
-        state.selectedFilters.push(filterTag)
+        state.selectedFilters.push(filter)
       }
     },
   },
