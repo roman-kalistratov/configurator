@@ -9,14 +9,17 @@ import {
   Typography,
   Button,
   FormControlLabel,
+  Stack,
+  Chip,
 } from "@mui/material"
 import { useState } from "react"
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import AddIcon from "@mui/icons-material/Add"
+import { removeFilter } from "../../../../redux/slices/filtersStateSlice"
 
 const RightSide = () => {
   const theme = useTheme()
+  const dispatch = useDispatch()
   const partItems = useSelector((state) => state.filters.partItems)
   const selectedFilters = useSelector((state) => state.filters.selectedFilters)
   const [searchTerm, setSearchTerm] = useState("")
@@ -70,6 +73,24 @@ const RightSide = () => {
             Search
           </Button>
         </Toolbar>
+
+        {selectedFilters && (
+          <Stack
+            direction="row"
+            p="0 0 16px 16px"
+            gap={1}
+            flexWrap="wrap"
+            justifyContent="flex-start"
+          >
+            {selectedFilters.map((chip, index) => (
+              <Chip
+                key={index}
+                label={`${chip.parentName}:${chip.name}`}
+                onDelete={() => dispatch(removeFilter(chip.tag))}
+              />
+            ))}
+          </Stack>
+        )}
       </AppBar>
 
       <Box

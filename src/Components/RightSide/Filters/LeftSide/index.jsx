@@ -19,14 +19,21 @@ const LeftSide = () => {
   const dispatch = useDispatch()
   const theme = useTheme()
 
-  const handleCheckboxChange = (filter) => {
-    dispatch(setFilter(filter))
+  const handleCheckboxChange = (filter, key, title) => {
+    const filterWithParent = {
+      ...filter,
+      parent: key,
+      parentName: title,
+    }
+
+    dispatch(setFilter(filterWithParent))
   }
 
   return (
     <Box
       sx={{
         flexBasis: "20%",
+        minWidth: "20%",
         height: "calc(95vh - 144px)",
         border: `1px solid ${theme.palette.secondary.dark}`,
         overflowY: "auto",
@@ -70,7 +77,7 @@ const LeftSide = () => {
                       checked={selectedFilters.some(
                         (selectedFilter) => selectedFilter.tag === filter.tag
                       )}
-                      onChange={() => handleCheckboxChange(filter)}
+                      onChange={() => handleCheckboxChange(filter, key, title)}
                     />
                   }
                   label={filter.name}

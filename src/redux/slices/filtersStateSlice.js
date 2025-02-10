@@ -21,17 +21,31 @@ export const filtersSlice = createSlice({
     setFilter: (state, action) => {
       const filter = action.payload // Объект фильтра с полями name, tag, cl
 
+      if (!state.part.idnt) {
+        console.warn("No selected part to associate with the filter.")
+        return
+      }
+
+      const filterWithPart = { ...filter, partIdnt: state.part.idnt } // Добавляем связь с part
+
       const existingFilterIndex = state.selectedFilters.findIndex(
-        (f) => f.tag === filter.tag // Проверяем, есть ли уже фильтр по tag
+        (f) => f.tag === filter.tag && f.partIdnt === state.part.idnt // Проверяем tag и принадлежность part
       )
 
       if (existingFilterIndex !== -1) {
-        // Убираем фильтр, если он уже выбран
+        // Если уже есть фильтр с таким tag для текущей part, удаляем его
         state.selectedFilters.splice(existingFilterIndex, 1)
       } else {
-        // Добавляем новый фильтр
-        state.selectedFilters.push(filter)
+        // Добавляем новый фильтр с привязкой к part
+        state.selectedFilters.push(filterWithPart)
       }
+    },
+    removeFilter: (state, action) => {
+      const tag = action.payload
+
+      state.selectedFilters = state.selectedFilters.filter(
+        (filter) => !(filter.tag === tag)
+      )
     },
   },
 })
@@ -69,6 +83,6 @@ const getDataByPart = (idnt) => {
   return { filters, partItems, compat }
 }
 
-export const { setPart, setFilter } = filtersSlice.actions
+export const { setPart, setFilter, removeFilter } = filtersSlice.actions
 
 export default filtersSlice.reducer
