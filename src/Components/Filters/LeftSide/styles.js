@@ -1,0 +1,10 @@
+import { Box } from "@mui/material"
+import { styled } from "@mui/material/styles"
+
+export const FiltersContainer = styled(Box)(({ theme }) => ({
+  flexBasis: "20%",
+  minWidth: "320px",
+  height: "calc(95vh - 144px)",
+  border: `1px solid ${theme.palette.secondary.dark}`,
+  overflowY: "auto",
+}))

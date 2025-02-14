@@ -17,6 +17,9 @@ const theme = createTheme({
       default: "#fff",
       paper: "#EDF1F4",
     },
+    customColors: {
+      black: "rgba(0, 0, 0, 0.87)",
+    },
   },
   typography: {
     fontFamily: "Assistant, sans-serif",
@@ -26,17 +29,14 @@ const theme = createTheme({
     },
     h2: {
       fontSize: "20px",
-      fontWeight: "500",
-    },
-    h3: {
-      fontSize: ".975rem",
+      fontWeight: "600",
     },
     body1: {
       fontWeight: "500",
     },
     body2: {
       fontWeight: "600",
-      opacity: 0.5,
+      opacity: 0.6,
     },
   },
   components: {
@@ -54,5 +54,18 @@ const theme = createTheme({
     },
   },
 })
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    customColors: {
+      black: string
+    }
+  }
+  interface PaletteOptions {
+    customColors: {
+      black: string
+    }
+  }
+}
 
 export default theme

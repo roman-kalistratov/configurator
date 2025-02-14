@@ -1,9 +1,9 @@
 import { Box, Container, Stack, useTheme } from "@mui/material"
-import Parts from "./Components/Parts"
-import RightSide from "./Components/RightSide"
-import ModalContent from "./Components/Modal"
-import Filters from "./Components/RightSide/Filters"
 import { useSelector } from "react-redux"
+import Filters from "./Components/Filters/Filters"
+import ModalContent from "./Components/Modal/ModalContent"
+import Parts from "./Components/Parts/Parts"
+import Summary from "./Components/Summary/Summary"
 
 const App = () => {
   const theme = useTheme()
@@ -31,7 +31,7 @@ const App = () => {
               top: 0,
             }}
           >
-            <RightSide />
+            <Summary />
           </Box>
         </Stack>
       </Container>

@@ -1,27 +1,28 @@
 import js from "@eslint/js"
-import globals from "globals"
 import react from "eslint-plugin-react"
 import reactHooks from "eslint-plugin-react-hooks"
 import reactRefresh from "eslint-plugin-react-refresh"
+import unusedImports from "eslint-plugin-unused-imports" // Импорт плагина
+import globals from "globals"
 
 export default [
   { ignores: ["dist"] },
   {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: "latest",
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
         sourceType: "module",
       },
     },
-    settings: { react: { version: "18.3" } },
+    settings: { react: { version: "detect" } },
     plugins: {
       react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "unused-imports": unusedImports, // Плагин должен быть объектом
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -34,6 +35,24 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": "off",
+      "import/no-unresolved": "off",
+      "import/extensions": "off",
+      "no-unused-vars": [
+        "warn",
+        { args: "after-used", vars: "all", ignoreRestSiblings: true },
+      ],
+      "react/jsx-uses-react": "off",
+      "react/jsx-uses-vars": "warn",
+      "unused-imports/no-unused-imports": "warn",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
     },
   },
 ]

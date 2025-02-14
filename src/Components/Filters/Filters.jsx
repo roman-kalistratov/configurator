@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material"
-import LeftSide from "./LeftSide"
-import RightSide from "./RightSide"
+import LeftSide from "./LeftSide/LeftSide"
+import RightSide from "./RightSide/RightSide"
 
 const Filters = () => {
   return (
