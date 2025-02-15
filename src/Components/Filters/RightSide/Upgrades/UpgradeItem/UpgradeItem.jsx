@@ -48,7 +48,7 @@ const UpgradeItem = ({ item }) => {
             </Box>
           </StyledBox>
           <PriceContainer>
-            <Typography variant="h2">${item.price}</Typography>
+            <Typography variant="h2">₪{item.price}</Typography>
             <AddIcon color="primary" sx={{ marginLeft: 1 }} />
           </PriceContainer>
         </StyledBox>

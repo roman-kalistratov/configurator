@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add"
 import CachedIcon from "@mui/icons-material/Cached"
 import CloseIcon from "@mui/icons-material/Close"
 import LinkIcon from "@mui/icons-material/Link"
-import { IconButton, Stack, Tooltip, Typography } from "@mui/material"
+import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import {
   ProductsTypography,
@@ -68,6 +68,17 @@ const PartItem = ({ item }) => {
             spacing={1}
             sx={{ ml: "auto" }}
           >
+            <Box width={110}>
+              <Typography
+                variant="h2"
+                fontSize={16}
+                align="left"
+                sx={{ marginRight: "20px" }}
+              >
+                Price: {upgrade.price}₪
+              </Typography>
+            </Box>
+
             <Tooltip title="switch">
               <StyledIconButton>
                 <CachedIcon />
