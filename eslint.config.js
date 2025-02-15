@@ -43,6 +43,7 @@ export default [
       ],
       "react/jsx-uses-react": "off",
       "react/jsx-uses-vars": "warn",
+      "react/display-name": "off",
       "unused-imports/no-unused-imports": "warn",
       "unused-imports/no-unused-vars": [
         "warn",

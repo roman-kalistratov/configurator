@@ -1,11 +1,10 @@
-import { Stack, Typography } from "@mui/material"
+import { IconButton, Stack, Typography } from "@mui/material"
 import { styled } from "@mui/material/styles"
 
 export const StyledStack = styled(Stack, {
   shouldForwardProp: (prop) => prop !== "isSelected",
 })(({ theme, isSelected }) => ({
   alignItems: "center",
-  justifyContent: "space-between",
   padding: "1.3rem",
   cursor: "pointer",
   border: `1px solid ${theme.palette.secondary.dark}`,
@@ -21,7 +20,7 @@ export const StyledStack = styled(Stack, {
 
 export const TitleTypography = styled(Typography)({
   whiteSpace: "nowrap",
-  width: "600px",
+  minWidth: "250px",
 })
 
 export const ProductsTypography = styled(Typography)({
@@ -30,3 +29,8 @@ export const ProductsTypography = styled(Typography)({
   marginRight: "50%",
   flexGrow: 1,
 })
+
+export const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  border: `1px solid ${theme.palette.secondary.dark}`,
+  borderRadius: 0,
+}))

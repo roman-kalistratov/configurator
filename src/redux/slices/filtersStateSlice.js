@@ -9,6 +9,7 @@ export const filtersSlice = createSlice({
     filters: {}, // данные при выборе part, по которой фильтруются товары
     partItems: {}, // все доступные товары
     compat: {}, // зависимости
+    selectedUpgrades: [], // массив выбранных частей
   },
   reducers: {
     setPart: (state, action) => {
@@ -47,6 +48,32 @@ export const filtersSlice = createSlice({
         (filter) => !(filter.tag === tag)
       )
     },
+    setUpgrade: (state, action) => {
+      const upgrade = action.payload
+
+      // Добавляем partIdnt из выбранной части
+      const upgradeWithPartIdnt = { ...upgrade, partIdnt: state.part.idnt }
+
+      // Удаляем все предыдущие апгрейды с таким же partIdnt
+      state.selectedUpgrades = state.selectedUpgrades.filter(
+        (item) => item.partIdnt !== state.part.idnt
+      )
+
+      // Добавляем новый upgrade
+      state.selectedUpgrades.push(upgradeWithPartIdnt)
+    },
+    removeUpgrade: (state, action) => {
+      const partIdnt = action.payload // Получаем partIdnt из payload
+
+      // Удаляем апгрейд с указанным partIdnt
+      state.selectedUpgrades = state.selectedUpgrades.filter(
+        (upgrade) => upgrade.partIdnt !== partIdnt
+      )
+    },
+    resetUpgrades: (state) => {
+      // Очищаем все данные из selectedUpgrades
+      state.selectedUpgrades = []
+    },
   },
 })
 
@@ -83,6 +110,13 @@ const getDataByPart = (idnt) => {
   return { filters, partItems, compat }
 }
 
-export const { setPart, setFilter, removeFilter } = filtersSlice.actions
+export const {
+  setPart,
+  setFilter,
+  removeFilter,
+  setUpgrade,
+  removeUpgrade,
+  resetUpgrades,
+} = filtersSlice.actions
 
 export default filtersSlice.reducer

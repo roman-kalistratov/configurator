@@ -8,8 +8,6 @@ const SelectedFilters = () => {
   const dispatch = useDispatch()
   const selectedFilters = useSelector((state) => state.filters.selectedFilters)
 
-  console.log(selectedFilters)
-
   const groupedData = selectedFilters.reduce((acc, item) => {
     const { parentName } = item
     if (!acc[parentName]) {

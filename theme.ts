@@ -19,6 +19,7 @@ const theme = createTheme({
     },
     customColors: {
       black: "rgba(0, 0, 0, 0.87)",
+      greyLight: "rgba(215, 245, 255, .2)",
     },
   },
   typography: {
@@ -59,11 +60,13 @@ declare module "@mui/material/styles" {
   interface Palette {
     customColors: {
       black: string
+      greyLight: string
     }
   }
   interface PaletteOptions {
     customColors: {
       black: string
+      greyLight: string
     }
   }
 }

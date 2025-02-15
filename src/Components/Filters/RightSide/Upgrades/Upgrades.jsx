@@ -4,10 +4,11 @@ import UpgradeItem from "./UpgradeItem/UpgradeItem"
 
 const Upgrades = () => {
   const partItems = useSelector((state) => state.filters.partItems)
+
   return (
     <UpgradesContainer>
-      {Object.entries(partItems).map(([itemKey, item]) => (
-        <UpgradeItem key={itemKey} item={item} />
+      {Object.values(partItems).map((item) => (
+        <UpgradeItem key={item.uin} item={item} />
       ))}
     </UpgradesContainer>
   )

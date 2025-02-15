@@ -7,9 +7,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
+import { memo } from "react"
 
 const FilterAccordion = ({ title, selectedCount, children }) => {
   const theme = useTheme()
+
   return (
     <Accordion
       sx={{
@@ -42,4 +44,4 @@ const FilterAccordion = ({ title, selectedCount, children }) => {
   )
 }
 
-export default FilterAccordion
+export default memo(FilterAccordion)
