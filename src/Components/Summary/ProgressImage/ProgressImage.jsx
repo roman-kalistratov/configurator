@@ -1,126 +1,154 @@
 import { Box } from "@mui/material"
-
 import UpgradeZone from "./UpgradeZone"
+import { images } from "@/assets"
 
 const ProgressImage = () => {
   return (
-    <Box sx={{ width: "100%", position: "relative" }}>
-      <img
-        src="https://img.ksp.co.il/item/16014/b_3.jpg?v=1547542303"
+    <Box
+      sx={{
+        width: "100%",
+        position: "relative",
+      }}
+    >
+      <img src={images.caseVector} width="100%" alt="pc case" loading="lazy" />
+
+      <UpgradeZone
+        idnt="299"
+        left="0"
+        top="0"
         width="100%"
-        alt="pc case"
-        loading="lazy"
+        height="100%"
+        title="CASE"
+        imageUrl={images.casePC}
       />
       <UpgradeZone
         idnt="291"
-        left="8%"
-        top="8%"
-        width="45%"
-        height="55%"
+        left="5%"
+        top="14%"
+        width="50%"
+        height="57%"
         title="MB"
-        imageUrl="https://www.regard.ru/_next/static/images/motherboard-f65d8c7465949c11e7f7d8f481e83993.webp"
+        imageUrl={images.mb}
       />
       <UpgradeZone
         idnt="289"
-        left="26%"
-        top="20%"
-        width="9%"
-        height="9%"
+        left="27.5%"
+        top="28%"
+        width="10%"
+        height="10%"
         title="CPU"
         zIndex={3}
-        imageUrl="data:image/webp;base64,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"
+        imageUrl={images.cpu}
       />
       <UpgradeZone
         idnt="290"
-        left="23%"
-        top="15%"
-        width="16%"
-        height="18%"
+        left="23.5%"
+        top="23%"
+        width="18%"
+        height="20%"
         title="COOLER"
         zIndex={2}
-        imageUrl="https://www.regard.ru/_next/static/images/air-cooling-1dc5b33671e4cb9868c80daae17def67.webp"
+        imageUrl={images.cooler}
       />
 
       <UpgradeZone
         idnt="292"
-        left="40%"
-        top="12%"
+        left="41%"
+        top="17%"
         width="8%"
         height="27%"
         title="RAM"
-        imageUrl="https://www.regard.ru/_next/static/images/RAM-eecdd18f45f1ab115e1167158178c712.webp"
+        imageUrl={images.ram}
+      />
+      <UpgradeZone
+        idnt="1310"
+        left="13%"
+        top="49%"
+        width="25%"
+        height="6%"
+        title="SSD1"
+        imageUrl={images.ssdM2}
+      />
+      <UpgradeZone
+        idnt="18938"
+        left="61%"
+        top="17%"
+        width="16%"
+        height="15%"
+        title="SSD2"
+        imageUrl={images.ssd}
+      />
+      <UpgradeZone
+        idnt="19140"
+        left="61%"
+        top="35%"
+        width="16%"
+        height="15%"
+        title="SSD3"
+        imageUrl={images.ssd}
       />
       <UpgradeZone
         idnt="293"
         left="12%"
-        top="39%"
+        top="44%"
         width="40%"
         height="5%"
         title="GPU1"
-        imageUrl="https://www.regard.ru/_next/static/images/video-card-19770d12dec1776e6e15fde1648ee741.webp"
-      />
-      <UpgradeZone
-        idnt="1310"
-        left="12%"
-        top="45%"
-        width="25%"
-        height="6%"
-        title="M.2"
-        imageUrl="https://www.regard.ru/_next/static/images/ssdM2-3cda9e45e23809fb6447befdd3978069.webp"
+        imageUrl={images.gpu}
       />
       <UpgradeZone
         idnt="18936"
         left="12%"
-        top="50%"
+        top="56%"
         width="40%"
         height="5%"
         title="GPU2"
-        imageUrl="https://www.regard.ru/_next/static/images/video-card-19770d12dec1776e6e15fde1648ee741.webp"
+        imageUrl={images.gpu}
       />
       <UpgradeZone
         idnt="18937"
         left="12%"
-        top="57%"
+        top="63%"
         width="40%"
         height="5%"
         title="GPU3"
-        imageUrl="https://www.regard.ru/_next/static/images/video-card-19770d12dec1776e6e15fde1648ee741.webp"
+        imageUrl={images.gpu}
       />
       <UpgradeZone
         idnt="298"
         left="6%"
-        top="70%"
-        width="30%"
-        height="15%"
+        top="74%"
+        width="27%"
+        height="12%"
         title="POWER"
-        imageUrl="https://www.regard.ru/_next/static/images/power-supply-d9c25fd7847c1602dba2fe2d82712b8c.webp"
+        imageUrl={images.power}
       />
       <UpgradeZone
         idnt="7669"
-        left="66%"
-        top="60%"
-        width="24%"
+        left="60%"
+        top="68%"
+        width="19%"
         height="5%"
         title="HDD1"
-        imageUrl="data:image/webp;base64,UklGRtwFAABXRUJQVlA4WAoAAAAQAAAATQEARgAAQUxQSF8BAAABp+KgjSRHuqruuRyeP9/nEBG5CLUlL9n0SMNgk00D8mcqzs89uYUy0LWjbYBUoQMcBW3bSLvHUvhzHoeImIAKqqyHFoqICABF/v8XERERERERERERARSIv/8oIiIiIiIiApZtuwqa4O7u8BSoO6Xujmb+k8EtK3+N6P8EwHaud397BP6+yAGJ489I5o6fQIkxEvrVRx7vH5K6u27uZHp2YEdcIrHtehXfcM6fg51wiuQurVMKF9zbfok7JPhZaH2eFhmtxhcpVIXRWiml5FLFEqWUSmltjLXNZqvZPn5EoncO7aQxWiklpRCisdR6Gxc+qQkplayXs0HPAu7qVR9Z9/M8O0/+DRn4Njyjgjzci0yJIBe/Oyeu2QgbABBGPn4BgAwjDQEgzUgDAIgxUg+g+sBJrhvk5N4R8tInM42Z6YOZ9pnJ0eElgPI9L0GUmdL///v/f2UZRkIASPb4+AsAVlA4IFYEAAAwIgCdASpOAUcAPl0oj0WjoqGb30UwOAXEtLcTGbVQx+wB0CLBK7diLDHKK44D8hd3GzUY7C+EoOpvvV/jYUZ3rNUUjews41xFrEYeM+W6aESxrzX2zOpTATlF978qs+rkGO4989BhTCPOgtjQ68y18gqQ1glJLYSx9MAxb1m88e6rB1o3yFDSk6RLSPtM4f8V/sQYpeRZ4aS6XP239f0WqcgZfvRtmhkj7ZBCZeCK0eqatTHTIXxPfOzrltwOtPLxi3Fln+Zeg0j59+lLCqlSAosOg75H2QR86fIor2nivBVfb334ROq87XTbbdWJzO37c0xBBBR0y2kx/2AWemLYlSrPiWXkbyWpkY2umnkWxKmrDymR5edGZAAA/hWD7CfNFZNisw1TVyhFAe/4lU/OqSQAbUo0MasgMm6QtDtvIlHZK9ZYZbt+svvJYIbttnObs1xtH+qNnyxbqZ9tyQWOfWclBfaeMXiCHI/Tu44azDgiNNCH2NC7nHzWaHHiBMYroTK5dxqgAUHK4KNQ72nJ7KmUCo30v3MdTReBI0LCVsQQv45X5p7Jl/QbZBYbBwDCJaE5mb218NoAqKjtkomfE66Z1shv8aYpNC8m9CxOsyjHaNa9Q77wpFcjSdaBJvP8xi1wn+EByFtEwsQCMM1aFAWW8nJqsyT91iT8LHPjxYjjPOd9xvTkuwh0ybIGG8Vh+qZ38PbK6ODyg/w6+zYHUFu5K0X87T3xp7p0uDlLPcXm/EUCVFcf7GF8kHD9fHXfII6WYcEeHxwoBrUhR1oTio/kJ+6BeebNpRd9B/TYsptZcpHbZ0ROK53uyP3Nse+GerLwaI9auepS/37yvyjvOiNlNaxqfSmjj8/ssS5Ts0DSclRfF0geuJVB0gg8hla+qZ76Nj4sbmXS9/7TwO8v7zr/eL0R31AlqNsxjbdrUR9w3MP2Xkv2tNnFnzyKYQG4ONOVbKT3h4nNOcBbVxElmgoGxQx02fGNQ4vlCUI6zpM0eGHHiG+vwBZjAbAM5Xxm2eOwBAlckh/BcE6ISIR1feW22khIkvgqZ157bsmfBsgXsHkIw3whpjEiMNmtFqiOWS9nv40GIqN6JWxLWrAbLnBm9T1PAZl60/lPGap0Q7wRwHa50onUJkDXdLR5B3bXavUVfAtBy9YnFoZXtpTip0W1ovG0WSlaDbUgUe9c8DkX6RL/9wg2G2P7XHPImL7pg09+cQkr4YRV2qfNX+xelJopbUfeHyD+nLDmiTx7ISASi5h3rG0Jy5vf03mgnqAnhHvY5XD7yTTX5Qx7cnYCF86youEgFbTWAdW0PAh0v+ngB/MRmhD3DwY4RiEyan/f2jUQmyIgmfdopmM42NJlL0XO9/LnhSsrZPpxrAdI4kvS3chpJ/wmbPmSEoHTFgw2J0R4XICSoLPk4tYYh7UteGx1xLwww2Rz1ff2Q8ChlbPdZogTYvYykWBezDGbDgfSgZ16AAA="
+        imageUrl={images.hdd}
       />
       <UpgradeZone
         idnt="18939"
-        left="66%"
-        top="67%"
-        width="24%"
+        left="60%"
+        top="74%"
+        width="19%"
         height="5%"
         title="HDD2"
-        imageUrl="data:image/webp;base64,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"
+        imageUrl={images.hdd}
       />
       <UpgradeZone
         idnt="19139"
-        left="66%"
-        top="74%"
-        width="24%"
+        left="60%"
+        top="80%"
+        width="19%"
         height="5%"
         title="HDD3"
-        imageUrl="data:image/webp;base64,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"
+        imageUrl={images.hdd}
       />
     </Box>
   )
