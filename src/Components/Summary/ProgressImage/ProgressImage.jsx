@@ -19,6 +19,7 @@ const ProgressImage = () => {
         width="100%"
         height="100%"
         title="CASE"
+        isCase={true}
         imageUrl={images.casePC}
       />
       <UpgradeZone
@@ -32,10 +33,10 @@ const ProgressImage = () => {
       />
       <UpgradeZone
         idnt="289"
-        left="27.5%"
-        top="28%"
-        width="10%"
-        height="10%"
+        left="28%"
+        top="28.5%"
+        width="9%"
+        height="9%"
         title="CPU"
         zIndex={3}
         imageUrl={images.cpu}

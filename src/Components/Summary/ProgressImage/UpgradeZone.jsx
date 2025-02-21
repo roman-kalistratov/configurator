@@ -15,6 +15,7 @@ const UpgradeZone = ({
   title,
   imageUrl,
   zIndex = 1,
+  isCase = false,
 }) => {
   const theme = useTheme()
   const dispatch = useDispatch()
@@ -47,7 +48,7 @@ const UpgradeZone = ({
             ? `url(${imageUrl}) no-repeat center / 100% 100%`
             : "none",
         "&:hover": {
-          outline: ".0625rem solid #fff",
+          outline: !upgrade && ".0625rem solid rgb(126, 118, 118)",
           borderRadius: "5px",
           background:
             upgrade && imageUrl
@@ -62,14 +63,15 @@ const UpgradeZone = ({
       {upgrade && (
         <Typography
           variant="body2"
-          fontSize={10}
+          fontSize={12}
           sx={{
             opacity: hovered ? 1 : 0,
             transition: "opacity 0.1s ease",
             whiteSpace: "nowrap",
             color: "white",
             position: "absolute",
-            left: "8%",
+            left: isCase ? "12%" : "8%",
+            top: isCase ? "2%" : "1%",
           }}
         >
           {title}
