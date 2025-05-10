@@ -1,6 +1,6 @@
-import { useTheme } from "@emotion/react"
-import { Checkbox, FormControlLabel } from "@mui/material"
-import { memo, useCallback } from "react"
+import { useTheme } from "@emotion/react";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { memo, useCallback } from "react";
 
 const FilterCheckbox = ({
   tag,
@@ -10,14 +10,11 @@ const FilterCheckbox = ({
   parentKey,
   parentTitle,
 }) => {
-  const theme = useTheme()
+  const theme = useTheme();
 
-  console.log(`Rendering FilterCheckbox: ${name}`)
-
-  // Функция `onChange` теперь стабильна, так как передается `tag`, а не объект
   const handleChange = useCallback(() => {
-    onChange(tag, parentKey, parentTitle)
-  }, [onChange, tag, parentKey, parentTitle])
+    onChange(tag, parentKey, parentTitle);
+  }, [onChange, tag, parentKey, parentTitle]);
 
   return (
     <FormControlLabel
@@ -29,7 +26,7 @@ const FilterCheckbox = ({
         },
       }}
     />
-  )
-}
+  );
+};
 
-export default memo(FilterCheckbox)
+export default memo(FilterCheckbox);

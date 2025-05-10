@@ -1,19 +1,19 @@
-import { setFilter } from "@/redux/slices/filtersStateSlice"
-import { memo, useCallback, useMemo } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import FilterAccordion from "./FilterAccordion"
-import FilterCheckbox from "./FilterCheckbox"
-import { FiltersContainer } from "./styles"
+import { setFilter } from "@/redux/slices/filtersStateSlice";
+import { memo, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FilterAccordion from "./FilterAccordion";
+import FilterCheckbox from "./FilterCheckbox";
+import { FiltersContainer } from "./styles";
 
 const LeftSide = () => {
-  const filtersByPart = useSelector((state) => state.filters.filters)
-  const selectedFilters = useSelector((state) => state.filters.selectedFilters)
-  const dispatch = useDispatch()
+  const filtersByPart = useSelector((state) => state.filters.filters);
+  const selectedFilters = useSelector((state) => state.filters.selectedFilters);
+  const dispatch = useDispatch();
 
   // Создаем Set для быстрого поиска
   const selectedFilterTags = useMemo(() => {
-    return new Set(selectedFilters.map((filter) => filter.tag))
-  }, [selectedFilters])
+    return new Set(selectedFilters.map((filter) => filter.tag));
+  }, [selectedFilters]);
 
   // Количество выбранных фильтров на категорию
   const selectedCounts = useMemo(() => {
@@ -26,18 +26,18 @@ const LeftSide = () => {
           0
         ),
       ])
-    )
-  }, [filtersByPart, selectedFilterTags])
+    );
+  }, [filtersByPart, selectedFilterTags]);
 
   const handleCheckboxChange = useCallback(
     (tag, key, title) => {
-      const filter = filtersByPart[key].filters.find((f) => f.tag === tag)
+      const filter = filtersByPart[key].filters.find((f) => f.tag === tag);
       if (filter) {
-        dispatch(setFilter({ ...filter, parent: key, parentName: title }))
+        dispatch(setFilter({ ...filter, parent: key, parentName: title }));
       }
     },
     [dispatch, filtersByPart]
-  )
+  );
 
   return (
     <FiltersContainer>
@@ -61,10 +61,10 @@ const LeftSide = () => {
         </FilterAccordion>
       ))}
     </FiltersContainer>
-  )
-}
+  );
+};
 
 // Передаем **примитивные** пропсы вместо объекта `filter`
-const MemoizedFilterCheckbox = memo(FilterCheckbox)
+const MemoizedFilterCheckbox = memo(FilterCheckbox);
 
-export default LeftSide
+export default LeftSide;

@@ -1,62 +1,62 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react"
-import { Box, Chip, Paper, Stack, Typography } from "@mui/material"
-import { useTheme } from "@emotion/react"
-import ViewListIcon from "@mui/icons-material/ViewList"
-import GridViewIcon from "@mui/icons-material/GridView"
-import { useDispatch, useSelector } from "react-redux"
-import { setFilter } from "../../redux/slices/filtersStateSlice"
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import GridViewIcon from "@mui/icons-material/GridView";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../../redux/slices/filtersStateSlice";
 
 const Updates = () => {
-  const theme = useTheme()
-  const filtersByPart = useSelector((state) => state.filters.filters)
-  const part = useSelector((state) => state.filters.part)
-  const partItems = useSelector((state) => state.filters.partItems)
-  const selectedFilters = useSelector((state) => state.filters.selectedFilters)
-  const [views, setViews] = useState({})
-  const dispatch = useDispatch()
+  const theme = useTheme();
+  const filtersByPart = useSelector((state) => state.filters.filters);
+  const part = useSelector((state) => state.filters.part);
+  const partItems = useSelector((state) => state.filters.partItems);
+  const selectedFilters = useSelector((state) => state.filters.selectedFilters);
+  const [views, setViews] = useState({});
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (filtersByPart) {
       const initialViews = Object.keys(filtersByPart).reduce((acc, key) => {
-        acc[key] = "list"
-        return acc
-      }, {})
-      setViews(initialViews)
+        acc[key] = "list";
+        return acc;
+      }, {});
+      setViews(initialViews);
     }
-  }, [filtersByPart])
+  }, [filtersByPart]);
 
   const filterPartItems = (partItems, selectedFilters) => {
     if (selectedFilters.length === 0) {
-      return partItems
+      return partItems;
     }
     return Object.fromEntries(
       Object.entries(partItems).filter(([, item]) => {
         return selectedFilters.some((filterTag) => {
           return Object.values(item.tags).some((tagArray) =>
             tagArray.includes(filterTag)
-          )
-        })
+          );
+        });
       })
-    )
-  }
+    );
+  };
 
   const filteredPartItems = useMemo(() => {
-    return filterPartItems(partItems, selectedFilters)
-  }, [partItems, selectedFilters])
+    return filterPartItems(partItems, selectedFilters);
+  }, [partItems, selectedFilters]);
 
   const selectFilter = useCallback(
     (filter) => {
-      dispatch(setFilter(filter))
+      dispatch(setFilter(filter));
     },
     [dispatch]
-  )
+  );
 
   const toggleView = useCallback((key, newView) => {
     setViews((prevViews) => ({
       ...prevViews,
       [key]: newView,
-    }))
-  }, [])
+    }));
+  }, []);
 
   const hasFilters = useMemo(
     () =>
@@ -64,7 +64,7 @@ const Updates = () => {
       part !== undefined &&
       Object.keys(filtersByPart).length > 0,
     [part, filtersByPart]
-  )
+  );
 
   return (
     <>
@@ -194,7 +194,7 @@ const Updates = () => {
         ))}
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default Updates
+export default Updates;

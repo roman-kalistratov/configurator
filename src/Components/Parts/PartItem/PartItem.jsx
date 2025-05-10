@@ -1,33 +1,33 @@
-import { removeUpgrade, setPart } from "@/redux/slices/filtersStateSlice"
-import { openModal } from "@/redux/slices/modalStateSlice"
-import AddIcon from "@mui/icons-material/Add"
-import CachedIcon from "@mui/icons-material/Cached"
-import CloseIcon from "@mui/icons-material/Close"
-import LinkIcon from "@mui/icons-material/Link"
-import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
+import { removeUpgrade, setPart } from "@/redux/slices/filtersStateSlice";
+import { openModal } from "@/redux/slices/modalStateSlice";
+import AddIcon from "@mui/icons-material/Add";
+import CachedIcon from "@mui/icons-material/Cached";
+import CloseIcon from "@mui/icons-material/Close";
+import LinkIcon from "@mui/icons-material/Link";
+import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import {
   ProductsTypography,
   StyledIconButton,
   StyledStack,
   TitleTypography,
-} from "./styles"
+} from "./styles";
 
 const PartItem = ({ item }) => {
-  const dispatch = useDispatch()
-  const part = useSelector((state) => state.filters.part)
+  const dispatch = useDispatch();
+  const part = useSelector((state) => state.filters.part);
   const selectedUpgrades = useSelector(
     (state) => state.filters.selectedUpgrades
-  )
+  );
 
   const selectedPart = (part) => {
-    dispatch(setPart(part))
-    dispatch(openModal())
-  }
+    dispatch(setPart(part));
+    dispatch(openModal());
+  };
 
   const upgrade = selectedUpgrades?.find(
     (upgrade) => upgrade.partIdnt === item.idnt
-  )
+  );
 
   return (
     <StyledStack
@@ -92,8 +92,8 @@ const PartItem = ({ item }) => {
             <Tooltip title="remove">
               <StyledIconButton
                 onClick={(e) => {
-                  e.stopPropagation()
-                  dispatch(removeUpgrade(item.idnt))
+                  e.stopPropagation();
+                  dispatch(removeUpgrade(item.idnt));
                 }}
               >
                 <CloseIcon />
@@ -121,7 +121,7 @@ const PartItem = ({ item }) => {
         </Stack>
       )}
     </StyledStack>
-  )
-}
+  );
+};
 
-export default PartItem
+export default PartItem;

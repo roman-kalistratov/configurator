@@ -3,11 +3,13 @@ import ActionButton from "./ActionButton/ActionButton";
 import ControlButtons from "./ControlButtons/ControlButtons";
 import ProgressImage from "./ProgressImage/ProgressImage";
 import { formatPrice } from "@/utils/formatPrice";
+import GlobalLoading from "../Loading/GlobalLoading";
 
 const Summary = () => {
   const number = 12400;
   return (
     <Stack spacing={3}>
+      <GlobalLoading />
       <ProgressImage />
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h1">Final Price:</Typography>
