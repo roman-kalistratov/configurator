@@ -64,7 +64,6 @@ const LeftSide = () => {
   );
 };
 
-// Передаем **примитивные** пропсы вместо объекта `filter`
 const MemoizedFilterCheckbox = memo(FilterCheckbox);
 
 export default LeftSide;

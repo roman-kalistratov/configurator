@@ -1,13 +1,13 @@
-import { Box, Container, Stack, useTheme } from "@mui/material"
-import { useSelector } from "react-redux"
-import Filters from "./Components/Filters/Filters"
-import ModalContent from "./Components/Modal/ModalContent"
-import Parts from "./Components/Parts/Parts"
-import Summary from "./Components/Summary/Summary"
+import { Box, Container, Stack, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import Filters from "./Components/Filters/Filters";
+import ModalContent from "./Components/Modal/ModalContent";
+import Parts from "./Components/Parts/Parts";
+import Summary from "./Components/Summary/Summary";
 
 const App = () => {
-  const theme = useTheme()
-  const part = useSelector((state) => state.filters.part)
+  const theme = useTheme();
+  const part = useSelector((state) => state.filters.part);
 
   return (
     <>
@@ -40,7 +40,7 @@ const App = () => {
         <Filters />
       </ModalContent>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

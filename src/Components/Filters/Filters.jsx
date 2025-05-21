@@ -5,12 +5,11 @@ import LeftSide from "./LeftSide/LeftSide";
 import RightSide from "./RightSide/RightSide";
 import FiltersSkeleton from "../Skeleton/FiltersSkeleton";
 import { setLoading } from "@/redux/slices/loadingStateSlice";
-import { shallowEqual } from "react-redux"; // для оптимизации
+import { shallowEqual } from "react-redux";
 
 const Filters = () => {
   const dispatch = useDispatch();
 
-  // Оптимизация селектора с использованием shallowEqual
   const isPartLoading = useSelector(
     (state) => state.loading.part,
     shallowEqual
@@ -21,7 +20,7 @@ const Filters = () => {
     dispatch(setLoading({ type: "part", value: true }));
     const timer = setTimeout(() => {
       dispatch(setLoading({ type: "part", value: false }));
-    }, 1000);
+    }, 500);
     return () => clearTimeout(timer);
   }, [dispatch]);
 
