@@ -1,0 +1,178 @@
+{
+  "parts": [
+    {
+      "idnt": "289",
+      "title": "Processor Intel",
+      "is_required": true
+    },
+    {
+      "idnt": "290",
+      "title": "CPU Cooler",
+      "is_required": true
+    },
+    {
+      "idnt": "291",
+      "title": "Motherboards for Intel",
+      "is_required": true
+    },
+    {
+      "idnt": "292",
+      "title": "Memory",
+      "is_required": true
+    },
+    {
+      "idnt": "298",
+      "title": "Power Supply",
+      "is_required": true
+    },
+    {
+      "idnt": "299",
+      "title": "Case",
+      "is_required": true
+    },
+    {
+      "idnt": "293",
+      "title": "VGA Cards"
+    },
+    {
+      "idnt": "18936",
+      "title": "VGA Cards"
+    },
+    {
+      "idnt": "18937",
+      "title": "VGA Cards"
+    },
+    {
+      "idnt": "1310",
+      "title": "Solid-State Drives (SSD)"
+    },
+    {
+      "idnt": "18938",
+      "title": "Solid-State Drives (SSD)"
+    },
+    {
+      "idnt": "19140",
+      "title": "Solid-State Drives (SSD)"
+    },
+    {
+      "idnt": "7669",
+      "title": "Hard Disk"
+    },
+    {
+      "idnt": "18939",
+      "title": "Hard Disk"
+    },
+    {
+      "idnt": "19139",
+      "title": "Hard Disk"
+    },
+    {
+      "idnt": "295",
+      "title": "Optical Writer"
+    },
+    {
+      "idnt": "296",
+      "title": "Sound Card"
+    },
+    {
+      "idnt": "297",
+      "title": "Net Device"
+    },
+    {
+      "idnt": "18943",
+      "title": "Net Device"
+    },
+    {
+      "idnt": "300",
+      "title": "Fans, Coolers, Accessories"
+    },
+    {
+      "idnt": "17297",
+      "title": "Fans, Coolers, Accessories"
+    },
+    {
+      "idnt": "17298",
+      "title": "Fans, Coolers, Accessories"
+    },
+    {
+      "idnt": "301",
+      "title": "Keyboard"
+    },
+    {
+      "idnt": "302",
+      "title": "Mouse"
+    },
+    {
+      "idnt": "19752",
+      "title": "Gamepads"
+    },
+    {
+      "idnt": "975",
+      "title": "Mouse Pad"
+    },
+    {
+      "idnt": "303",
+      "title": "Speakers"
+    },
+    {
+      "idnt": "19753",
+      "title": "Headset"
+    },
+    {
+      "idnt": "304",
+      "title": "Monitor"
+    },
+    {
+      "idnt": "21766",
+      "title": "Monitor"
+    },
+    {
+      "idnt": "17294",
+      "title": "Cables"
+    },
+    {
+      "idnt": "17295",
+      "title": "Cables"
+    },
+    {
+      "idnt": "17296",
+      "title": "Cables"
+    },
+    {
+      "idnt": "8251",
+      "title": "Operating Systems"
+    },
+    {
+      "idnt": "8252",
+      "title": "Office"
+    },
+    {
+      "idnt": "8253",
+      "title": "Antivirus, Security"
+    },
+    {
+      "idnt": "4632",
+      "title": "Web Camera"
+    },
+    {
+      "idnt": "4634",
+      "title": "Printer"
+    },
+    {
+      "idnt": "11047",
+      "title": "Assembly",
+      "uin": "23069",
+      "whs_total": "0",
+
+      "addons": 1,
+
+      "price": "1",
+      "qnt": "1",
+      "name": "\u05d4\u05e8\u05db\u05d1\u05ea \u05d7\u05d1\u05d9\u05dc\u05d4 \u05de\u05d7\u05dc\u05e7\u05d9\u05dd \u05e9\u05d1\u05de\u05d1\u05e6\u05e2",
+      "uinsql": "2579",
+      "dis_payments": "2",
+
+      "img": "https://ksp.co.il/shop/items/128/23069.jpg"
+    }
+  ]
+}
