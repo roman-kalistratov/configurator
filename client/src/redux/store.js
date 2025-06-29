@@ -3,6 +3,7 @@ import { apiSlice } from './slices/api/apiSlice';
 import filtersStateSlice from './slices/filtersStateSlice';
 import upgradesStateSlice from './slices/upgradesStateSlice';
 import modalStateSlice from './slices/modalStateSlice';
+import viewStateSlice from './slices/viewStateSlice';
 import partSlice from './slices/partSlice';
 import loadingSlice from './slices/loadingStateSlice';
 
@@ -11,6 +12,7 @@ const store = configureStore({
     filters: filtersStateSlice,
     upgrades: upgradesStateSlice,
     modal: modalStateSlice,
+    view: viewStateSlice,
 
     part: partSlice,
     loading: loadingSlice,

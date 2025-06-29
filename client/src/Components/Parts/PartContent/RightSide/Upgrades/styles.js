@@ -3,7 +3,7 @@ import { keyframes, styled } from '@mui/material/styles';
 
 export const UpgradesContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  padding: '16px',
+  padding: theme.spacing(2),
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(1),

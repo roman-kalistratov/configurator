@@ -41,10 +41,19 @@ export const filtersSlice = createSlice({
       const { [partIdnt]: _, ...rest } = state.selectedFiltersByPart;
       state.selectedFiltersByPart = rest;
     },
+
+    clearAllFilters: (state) => {
+      state.selectedFiltersByPart = {};
+    },
   },
 });
 
-export const { setFilter, removeFilter, clearFilters, setMultipleFilters } =
-  filtersSlice.actions;
+export const {
+  setFilter,
+  removeFilter,
+  clearFilters,
+  setMultipleFilters,
+  clearAllFilters,
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;

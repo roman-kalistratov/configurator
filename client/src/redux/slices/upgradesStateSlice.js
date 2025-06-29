@@ -14,8 +14,13 @@ export const upgradesSlice = createSlice({
       const { partIdnt } = action.payload;
       delete state.selectedUpgrades[partIdnt];
     },
+
+    clearAllUpgrades: (state) => {
+      state.selectedUpgrades = {};
+    },
   },
 });
 
-export const { setUpgrade, clearUpgrade } = upgradesSlice.actions;
+export const { setUpgrade, clearUpgrade, clearAllUpgrades } =
+  upgradesSlice.actions;
 export default upgradesSlice.reducer;

@@ -1,13 +1,20 @@
 import { Box, Stack, Tooltip, Typography } from '@mui/material';
 import { StyledIconButton } from './styles';
 import { clearUpgrade } from '@/redux/slices/upgradesStateSlice';
+import { clearFilters } from '@/redux/slices/filtersStateSlice';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
 import { useDispatch } from 'react-redux';
+import { formatPrice } from '@/utils/formatPrice';
 
 const SelectedPartUpgrade = ({ partIdnt, upgrade }) => {
   const dispatch = useDispatch();
+
+  const handleClearSelectedpart = () => {
+    dispatch(clearUpgrade({ partIdnt: partIdnt }));
+    dispatch(clearFilters(partIdnt));
+  };
 
   return (
     <>
@@ -44,7 +51,7 @@ const SelectedPartUpgrade = ({ partIdnt, upgrade }) => {
             noWrap
             sx={{ margin: '0 20px' }}
           >
-            Price: {upgrade.price}₪
+            Price: ₪{formatPrice(parseFloat(upgrade.price))}
           </Typography>
         </Box>
 
@@ -62,7 +69,7 @@ const SelectedPartUpgrade = ({ partIdnt, upgrade }) => {
           <StyledIconButton
             onClick={(e) => {
               e.stopPropagation();
-              dispatch(clearUpgrade({ partIdnt: partIdnt }));
+              handleClearSelectedpart();
             }}
           >
             <CloseIcon />
