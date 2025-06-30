@@ -3,7 +3,7 @@ import { useGetItemsByPartQuery } from '@/redux/slices/api/upgradesApiSlice';
 import { LinearProgress, Typography, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import UpgradeItem from './UpgradeItem/UpgradeItem';
+import UpgradeItem from './Components/UpgradeItem/UpgradeItem';
 import { useGetFiltersByPartQuery } from '@/redux/slices/api/filtersApiSlice';
 import { transformedFiltersForPart } from '@/redux/selectors/filtersSelectors';
 import * as S from './styles';
@@ -17,6 +17,7 @@ const Upgrades = ({ partidnt }) => {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [initialLoaded, setInitialLoaded] = useState(false);
+  const viewTypeList = useSelector((state) => state.view.listView);
 
   const filters = useSelector((state) =>
     transformedFiltersForPart(state, partidnt),
@@ -113,41 +114,45 @@ const Upgrades = ({ partidnt }) => {
 
   return (
     <S.UpgradesContainer id="scrollableUpgrades">
+      {isFetching && offset === 0 && (
+        <S.LoadingWrapper>
+          <LinearProgress
+            variant="indeterminate"
+            sx={{
+              height: 3,
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: theme.palette.primary.light,
+                transition: 'none',
+              },
+            }}
+          />
+        </S.LoadingWrapper>
+      )}
+
       <InfiniteScroll
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}
         scrollableTarget="scrollableUpgrades"
-        loader={
-          <S.LoadingWrapper>
-            <LinearProgress
-              variant="indeterminate"
-              sx={{
-                height: 3,
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: theme.palette.primary.light,
-                  transition: 'none',
-                },
-              }}
-            />
-          </S.LoadingWrapper>
-        }
       >
-        {items.map((item) => (
-          <UpgradeItem
-            key={item.uin}
-            uin={item.uin}
-            name={item.name}
-            price={item.price}
-            img={item.image_lrg}
-            tags={item.tags}
-            url={item.url}
-            partType={item.partType}
-            partIdnt={partidnt}
-            isSelected={selectedUin === item.uin}
-            allFiltersForPart={allFiltersForPart}
-          />
-        ))}
+        <S.UpgradesWrapper viewTypeList={viewTypeList}>
+          {items.map((item) => (
+            <UpgradeItem
+              key={item.uin}
+              uin={item.uin}
+              name={item.name}
+              price={item.price}
+              img={item.image_lrg}
+              tags={item.tags}
+              url={item.url}
+              partType={item.partType}
+              partIdnt={partidnt}
+              isSelected={selectedUin === item.uin}
+              allFiltersForPart={allFiltersForPart}
+              viewTypeList={viewTypeList}
+            />
+          ))}
+        </S.UpgradesWrapper>
       </InfiniteScroll>
     </S.UpgradesContainer>
   );

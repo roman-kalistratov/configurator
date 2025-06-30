@@ -13,13 +13,6 @@ const Parts = () => {
     (state) => state.upgrades.selectedUpgrades,
   );
 
-  const selectedFiltersByPart = useSelector(
-    (state) => state.filters.selectedFiltersByPart,
-  );
-
-  console.log('selectedFiltersByPart', selectedFiltersByPart);
-  console.log('selectedUpgrades', selectedUpgrades);
-
   const { compatibilityErrors, openModal, setOpenModal } =
     useCompatibilityCheck(selectedUpgrades);
 

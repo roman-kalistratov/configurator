@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFilter, setFilter } from '@/redux/slices/filtersStateSlice';
 import { clearUpgrade } from '@/redux/slices/upgradesStateSlice';
 import { selectedFiltersForPart } from '@/redux/selectors/filtersSelectors';
-import FilterAccordion from './FilterAccordion';
-import MemoizedFilterCheckbox from './FilterCheckbox';
+import FilterAccordion from './Components/FilterAccordion';
+import MemoizedFilterCheckbox from './Components/FilterCheckbox';
 import { FiltersContainer } from './styles';
 
 const LeftSide = ({ filtersData }) => {

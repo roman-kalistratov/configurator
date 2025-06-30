@@ -1,23 +1,23 @@
 import { Box, Link, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { memo } from 'react';
-import { PriceContainer, StyledBox } from './styles';
+import * as S from './styles';
 
-const UpgradeItemLabel = ({ uin, name, price, img, url }) => (
-  <StyledBox>
-    <StyledBox>
+const UpgradeItemLabel = ({ uin, name, price, img, url, viewTypeList }) => (
+  <S.LabelWrapper viewTypeList={viewTypeList}>
+    <S.StyledBox viewTypeList={viewTypeList}>
       <img
         src={img}
         alt={name}
         style={{
-          width: '50px',
-          height: '50px',
-          marginRight: '10px',
+          width: viewTypeList ? '80px' : '150px',
+          height: viewTypeList ? '80px' : '150px',
+          minHeight: viewTypeList ? '80px' : '150px',
+          marginRight: viewTypeList ? '10px' : '0',
           objectFit: 'contain',
         }}
       />
-      <Box>
-        <Typography variant="body1">
+      <Box sx={{ maxWidth: '100%' }}>
+        <Typography variant="body1" sx={{ maxWidth: '100%' }}>
           <Link
             href={url}
             target="_blank"
@@ -35,14 +35,14 @@ const UpgradeItemLabel = ({ uin, name, price, img, url }) => (
         </Typography>
         <Typography variant="body2">KSP SKU: {uin}</Typography>
       </Box>
-    </StyledBox>
-    <PriceContainer>
+    </S.StyledBox>
+    <S.PriceContainer viewTypeList={viewTypeList}>
       <Box display="flex" alignItems="center" gap={1}>
         <Typography variant="h2">₪{price}</Typography>
         <AddIcon color="primary" sx={{ marginLeft: 1 }} />
       </Box>
-    </PriceContainer>
-  </StyledBox>
+    </S.PriceContainer>
+  </S.LabelWrapper>
 );
 
-export default memo(UpgradeItemLabel);
+export default UpgradeItemLabel;

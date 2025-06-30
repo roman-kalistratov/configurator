@@ -36,6 +36,7 @@ const SelectedFilters = ({ partIdnt }) => {
         flexWrap: 'wrap',
         padding: theme.spacing(2),
         gap: 2,
+        border: `1px solid ${theme.palette.secondary.dark}`,
       }}
     >
       {/* Левая часть — все фильтры */}

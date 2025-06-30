@@ -4,11 +4,22 @@ import { keyframes, styled } from '@mui/material/styles';
 export const UpgradesContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   padding: theme.spacing(2),
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(1),
   height: '100%',
   overflowY: 'auto',
+}));
+
+export const UpgradesWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'viewTypeList',
+})(({ theme, viewTypeList }) => ({
+  height: '100%',
+  overflowY: 'auto',
+  paddingBottom: theme.spacing(2),
+  ...(!viewTypeList && {
+    //display type grid
+    display: 'grid',
+    gap: theme.spacing(2),
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  }),
 }));
 
 const fadeIn = keyframes`

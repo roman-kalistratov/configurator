@@ -26,7 +26,7 @@ const FilterAccordion = ({ title, children }) => {
           borderBottom: `1px solid ${theme.palette.secondary.dark}`,
         }}
       >
-        <Typography variant='h2'>{title}</Typography>
+        <Typography variant="h2">{title}</Typography>
       </AccordionSummary>
       <AccordionDetails
         sx={{

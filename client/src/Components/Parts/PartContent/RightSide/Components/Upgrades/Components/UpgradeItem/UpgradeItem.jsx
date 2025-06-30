@@ -17,6 +17,7 @@ const UpgradeItem = ({
   partIdnt,
   isSelected,
   allFiltersForPart,
+  viewTypeList,
 }) => {
   const dispatch = useDispatch();
 
@@ -78,6 +79,7 @@ const UpgradeItem = ({
           color="primary"
           checked={isSelected}
           onChange={handleSelect}
+          sx={{ display: !viewTypeList && 'none' }}
         />
       }
       label={
@@ -87,6 +89,7 @@ const UpgradeItem = ({
           price={price}
           img={img}
           url={url}
+          viewTypeList={viewTypeList}
         />
       }
     />
