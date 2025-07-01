@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-const Sorting = () => {
+const Sorting = ({ setSortOrder }) => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -23,8 +23,7 @@ const Sorting = () => {
   };
 
   const handlePriceSort = (type) => {
-    console.log('Выбран фильтр по цене:', type);
-    // dispatch или setState для сортировки по типу: 'asc', 'desc', 'default'
+    setSortOrder(type);
     handleClose();
   };
 

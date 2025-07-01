@@ -10,7 +10,7 @@ import * as S from './styles';
 
 const LIMIT = 15;
 
-const Upgrades = ({ partidnt }) => {
+const Upgrades = ({ partidnt, sort }) => {
   const theme = useTheme();
 
   const [offset, setOffset] = useState(0);
@@ -34,7 +34,13 @@ const Upgrades = ({ partidnt }) => {
 
   // ✅ Автоматический запрос с кэшированием
   const { data, isFetching, isError } = useGetItemsByPartQuery(
-    { partIdnt: partidnt, limit: LIMIT, offset, filters: memoizedFilters },
+    {
+      partIdnt: partidnt,
+      limit: LIMIT,
+      offset,
+      filters: memoizedFilters,
+      sort,
+    },
     {
       skip: !partidnt,
     },
@@ -46,7 +52,7 @@ const Upgrades = ({ partidnt }) => {
     setItems([]);
     setHasMore(true);
     setInitialLoaded(false);
-  }, [partidnt, filtersString]);
+  }, [partidnt, filtersString, sort]);
 
   // Обновляем items — ЗАМЕНЯЕМ, если offset === 0, иначе добавляем
   useEffect(() => {
@@ -65,6 +71,8 @@ const Upgrades = ({ partidnt }) => {
     setInitialLoaded(true);
     if (data.length < LIMIT) {
       setHasMore(false);
+    } else {
+      setHasMore(true); // ← это нужно для сброса
     }
   }, [data, offset]);
 
@@ -104,7 +112,10 @@ const Upgrades = ({ partidnt }) => {
   }
 
   // Нет данных (после полной загрузки)
-  if (!isFetching && initialLoaded && items.length === 0) {
+  const isEmptyResult =
+    !isFetching && initialLoaded && items.length === 0 && data?.length === 0;
+
+  if (isEmptyResult) {
     return (
       <S.UpgradesContainer>
         <Typography variant="body1">Upgrades not found</Typography>

@@ -5,11 +5,18 @@ import qs from 'qs';
 export const upgradesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getItemsByPart: builder.query({
-      query: ({ partIdnt, filters = {}, limit = 10, offset = 0 }) => {
+      query: ({
+        partIdnt,
+        filters = {},
+        limit = 10,
+        offset = 0,
+        sort = 'default',
+      }) => {
         const query = {
           ...filters,
           limit,
           offset,
+          sort,
         };
 
         const queryString = qs.stringify(query, {

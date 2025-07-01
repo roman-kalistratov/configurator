@@ -18,13 +18,13 @@ const SelectedPartUpgrade = ({ partIdnt, upgrade }) => {
 
   return (
     <>
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="row" alignItems="center" spacing={2}>
         <img
           src={upgrade.img}
           alt={upgrade.name}
           style={{
-            width: 40,
-            height: 40,
+            width: 50,
+            height: 50,
             objectFit: 'contain',
           }}
         />

@@ -90,6 +90,8 @@ const UpgradeItem = ({
           img={img}
           url={url}
           viewTypeList={viewTypeList}
+          isSelected={isSelected}
+          handleSelect={handleSelect}
         />
       }
     />

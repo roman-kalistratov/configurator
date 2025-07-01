@@ -1,5 +1,5 @@
 // styles.js
-import { Box, FormControlLabel } from '@mui/material';
+import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const StyledFormControl = styled(FormControlLabel)(({ theme }) => ({
@@ -10,6 +10,7 @@ export const StyledFormControl = styled(FormControlLabel)(({ theme }) => ({
   boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
   padding: theme.spacing(1),
   gap: 5,
+  position: 'relative',
   '& .MuiFormControlLabel-label': {
     flexGrow: 1,
   },
@@ -25,10 +26,11 @@ export const LabelWrapper = styled(Box, {
   alignItems: 'center',
   ...(!viewTypeList && {
     //display type grid
+    position: 'relative',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: `${theme.spacing(2)} 0`,
+    padding: `${theme.spacing(2)} ${theme.spacing(1)}`,
   }),
 }));
 
@@ -40,7 +42,9 @@ export const StyledBox = styled(Box, {
   gap: 10,
   ...(!viewTypeList && {
     //display type grid
-    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: `${theme.spacing(2)} 0}`,
+    gap: 20,
   }),
 }));
 
@@ -52,6 +56,19 @@ export const PriceContainer = styled(Box, {
   marginLeft: 'auto',
   ...(!viewTypeList && {
     //display type grid
-    marginLeft: 0,
+    display: 'none',
+  }),
+}));
+
+export const StyledCheckbox = styled(Checkbox, {
+  shouldForwardProp: (prop) => prop !== 'viewTypeList',
+})(({ theme, viewTypeList }) => ({
+  display: 'none',
+  ...(!viewTypeList && {
+    //display type grid
+    display: 'block',
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
   }),
 }));

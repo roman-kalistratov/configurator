@@ -25,10 +25,12 @@ export const getItemsByPart = (req, res) => {
     // Извлекаем limit и offset из query
     const limit = parseInt(queryFilters.limit, 10);
     const offset = parseInt(queryFilters.offset, 10) || 0;
+    const sort = queryFilters.sort || "default";
 
-    // Удаляем служебные параметры limit и offset из фильтров
+    // Удаляем служебные параметры limit, offset и sort из фильтров
     delete queryFilters.limit;
     delete queryFilters.offset;
+    delete queryFilters.sort;
 
     // Преобразование фильтров вида c_4=68996 в {"4": ["68996", "68997"]}
     const normalizedFilters = {};
@@ -52,12 +54,20 @@ export const getItemsByPart = (req, res) => {
       );
     });
 
-    // Сортировка по цене (по возрастанию)
-    items.sort((a, b) => {
-      const priceA = parseFloat(a.price) || 0;
-      const priceB = parseFloat(b.price) || 0;
-      return priceA - priceB;
-    });
+    // Сортировка по цене
+    if (sort === "asc") {
+      items.sort((a, b) => {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB;
+      });
+    } else if (sort === "desc") {
+      items.sort((a, b) => {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceB - priceA;
+      });
+    }
 
     // Создание карты изображений по uin
     const imageMap = Object.fromEntries(

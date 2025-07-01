@@ -6,10 +6,12 @@ import { useSelector } from 'react-redux';
 import SelectedFilters from './Components/SelectedFilters/SelectedFilters';
 import Sorting from './Components/Sorting';
 import ViewButtons from './Components/ViewButtons';
+import { useState } from 'react';
 
 const RightSide = () => {
   const theme = useTheme();
   const selectedPartIdnt = useSelector((state) => state.part.selectedPart.idnt);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   return (
     <Box
@@ -31,13 +33,9 @@ const RightSide = () => {
           border: `1px solid ${theme.palette.secondary.dark}`,
         }}
       >
-        {/* sotring */}
-        <Sorting />
-        {/* sotring end */}
+        <Sorting sortOrder={sortOrder} setSortOrder={setSortOrder} />
 
-        {/* search */}
         <Search />
-        {/* search end */}
 
         <ViewButtons />
       </Box>
@@ -51,7 +49,7 @@ const RightSide = () => {
           border: `1px solid ${theme.palette.secondary.dark}`,
         }}
       >
-        <Upgrades partidnt={selectedPartIdnt} />
+        <Upgrades partidnt={selectedPartIdnt} sort={sortOrder} />
       </Box>
     </Box>
   );
