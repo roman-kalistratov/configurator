@@ -2,8 +2,9 @@ import { Box, Container, Stack, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Parts from './Components/Parts/Parts';
 import ModalContent from './Components/Modal/ModalContent';
-import PartContent from './Components/Parts/PartContent/PartContent';
 import Summary from './Components/Summary/Summary';
+import UpgradeInfo from './Components/UpgradeInfo/UpgradeInfo';
+// import PartContent from './Components/Parts/PartContent/PartContent';
 
 const App = () => {
   const theme = useTheme();
@@ -35,8 +36,12 @@ const App = () => {
       </Container>
 
       <ModalContent title={partTitle}>
-        <PartContent partIdnt={partIdnt} />
+        <UpgradeInfo />
       </ModalContent>
+
+      {/* <ModalContent title={partTitle}>
+        <PartContent partIdnt={partIdnt} />
+      </ModalContent> */}
     </>
   );
 };

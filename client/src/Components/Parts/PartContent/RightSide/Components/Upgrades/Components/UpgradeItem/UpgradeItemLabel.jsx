@@ -47,7 +47,7 @@ const UpgradeItemLabel = ({
               {name}
             </Link>
           </Typography>
-          <Typography variant="body2">KSP SKU: {uin}</Typography>
+          <Typography variant="body2">SKU: {uin}</Typography>
           <Typography
             variant="h2"
             sx={{ display: viewTypeList ? 'none' : 'flex', mt: 2 }}

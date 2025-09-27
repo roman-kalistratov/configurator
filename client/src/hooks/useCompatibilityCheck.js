@@ -20,7 +20,7 @@ export const useCompatibilityCheck = (selectedUpgrades) => {
             tag,
             key: `c_${key}`,
             tagName: tag,
-            partType: upgrade.partType.toLowerCase(),
+            partType: upgrade?.partType?.toLowerCase(),
             name: upgrade.name,
           });
         });

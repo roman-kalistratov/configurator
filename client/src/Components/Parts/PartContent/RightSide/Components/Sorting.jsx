@@ -56,13 +56,13 @@ const Sorting = ({ setSortOrder }) => {
         }}
       >
         <MenuItem onClick={() => handlePriceSort('default')}>
-          По популярности
+          Popularity
         </MenuItem>
         <MenuItem onClick={() => handlePriceSort('asc')}>
-          Цена: от низкой к высокой
+          Price: lowest to highest
         </MenuItem>
         <MenuItem onClick={() => handlePriceSort('desc')}>
-          Цена: от высокой к низкой
+          Price: highest to lowest
         </MenuItem>
       </Menu>
     </Box>
