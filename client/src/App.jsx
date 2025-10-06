@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux';
 import Parts from './Components/Parts/Parts';
 import ModalContent from './Components/Modal/ModalContent';
 import Summary from './Components/Summary/Summary';
-import UpgradeInfo from './Components/UpgradeInfo/UpgradeInfo';
+// import UpgradeInfo from './Components/UpgradeInfo/UpgradeInfo';
 // import PartContent from './Components/Parts/PartContent/PartContent';
+import CompareDrawer from './Components/Drawer/CompareDrawer/CompareDrawer';
+import CreditPayments from './Components/Modal/CreditPayments';
 
 const App = () => {
   const theme = useTheme();
@@ -35,13 +37,19 @@ const App = () => {
         </Stack>
       </Container>
 
-      <ModalContent title={partTitle}>
+      {/* <ModalContent title={partTitle}>
         <UpgradeInfo />
+      </ModalContent> */}
+
+      <ModalContent title={partTitle}>
+        <CreditPayments />
       </ModalContent>
 
       {/* <ModalContent title={partTitle}>
         <PartContent partIdnt={partIdnt} />
       </ModalContent> */}
+
+      <CompareDrawer />
     </>
   );
 };

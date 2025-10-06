@@ -84,6 +84,7 @@ const UpgradeItem = ({
       }
       label={
         <UpgradeItemLabel
+          partIdnt={partIdnt}
           uin={uin}
           name={name}
           price={price}

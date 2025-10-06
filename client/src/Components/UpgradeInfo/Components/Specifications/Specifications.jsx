@@ -1,8 +1,7 @@
-import { Grid, useTheme } from '@mui/material';
+import { Grid } from '@mui/material';
 import * as S from './style';
 
 const Specifications = ({ specification }) => {
-  const theme = useTheme();
   return (
     <>
       <S.SpecificationsTitleWrapper>

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const viewSlice = createSlice({
   name: 'view',
   initialState: {
-    listView: false, // true = list, false = grid
+    listView: true, // true = list, false = grid
   },
   reducers: {
     setView: (state, action) => {

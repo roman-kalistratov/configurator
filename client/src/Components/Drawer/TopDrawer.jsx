@@ -1,6 +1,6 @@
 import { Drawer, Slide, Box } from '@mui/material';
 
-function TopDrawer({ open, onClose, children }) {
+function TopDrawer({ open, onClose, children, sx }) {
   return (
     <Drawer
       anchor="top"
@@ -24,6 +24,8 @@ function TopDrawer({ open, onClose, children }) {
             width: 'max-content', // или другая желаемая ширина
             maxWidth: '50vw', // адаптивно
             height: 'auto',
+            maxHeight: '88dvh',
+            ...sx,
           },
         },
       }}

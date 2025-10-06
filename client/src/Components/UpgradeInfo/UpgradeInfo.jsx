@@ -38,7 +38,7 @@ export function parseSpecificationHtml(html) {
 const UpgradeInfo = () => {
   const data = demoItem.result;
   const title = data.data.name;
-  const subtitle = data.data.name;
+  const subtitle = data.data.smalldesc;
 
   const mainImg = data.images.find((item) => item.img_id === '4')?.sizes.l.src;
 

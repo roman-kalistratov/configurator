@@ -6,6 +6,7 @@ import modalStateSlice from './slices/modalStateSlice';
 import viewStateSlice from './slices/viewStateSlice';
 import partSlice from './slices/partSlice';
 import loadingSlice from './slices/loadingStateSlice';
+import compareStateSlice from './slices/compareStateSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     upgrades: upgradesStateSlice,
     modal: modalStateSlice,
     view: viewStateSlice,
+    compare: compareStateSlice,
 
     part: partSlice,
     loading: loadingSlice,

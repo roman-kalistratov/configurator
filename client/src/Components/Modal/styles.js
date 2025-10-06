@@ -7,7 +7,7 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '100%',
+  width: '600px',
   maxWidth: '1650px',
   height: '95dvh',
   backgroundColor: theme.palette.background.paper,
